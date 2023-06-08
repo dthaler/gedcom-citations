@@ -1,0 +1,31 @@
+%YAML 1.2
+---
+lang: en-US
+
+type: structure
+
+uri: https://github.com/dthaler/gedcom-citations/yaml/_TPLT-SOUR
+
+standard tag: SOUR
+
+specification:
+  - Collection
+  - |
+    A source record for the collection in which the containing record is present.
+
+label: 'Collection'
+
+payload: "@<https://gedcom.io/terms/v7/record-SOUR>@"
+
+substructures:
+  "https://gedcom.io/terms/v7/NOTE": "{0:M}"
+  "https://gedcom.io/terms/v7/OBJE": "{0:M}"
+  "https://gedcom.io/terms/v7/PAGE": "{0:1}"
+  "https://gedcom.io/terms/v7/QUAY": "{0:1}"
+  "https://gedcom.io/terms/v7/SNOTE": "{0:M}"
+  "https://gedcom.io/terms/v7/SOUR-DATA": "{0:1}"
+  "https://gedcom.io/terms/v7/SOUR-EVEN": "{0:1}"
+
+superstructures:
+  "https://github.com/dthaler/gedcom-citations/yaml/_TPLT": "{0:1}"
+...

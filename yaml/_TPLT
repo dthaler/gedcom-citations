@@ -1,0 +1,27 @@
+%YAML 1.2
+---
+lang: en-US
+
+type: structure
+
+uri: https://github.com/dthaler/gedcom-citations/yaml/_TPLT
+
+extension tags:
+  - _TPLT
+
+specification:
+  - Template Name
+  - |
+    The ShortURI of a source template.  It is recommended that the URI be resolvable to a YAML file containing the source template.
+
+label: 'Template Name'
+
+payload: http://www.w3.org/2001/XMLSchema#anyURI
+
+substructures:
+  "https://github.com/dthaler/gedcom-citations/yaml/_FIEL": "{0:M}"
+  "https://github.com/dthaler/gedcom-citations/yaml/_TPLT-SOUR": "{0:1}"
+
+superstructures:
+  "https://gedcom.io/terms/v7/record-SOUR": "{0:1}"
+...

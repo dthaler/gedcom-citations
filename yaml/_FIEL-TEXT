@@ -1,0 +1,24 @@
+%YAML 1.2
+---
+lang: en-US
+
+type: structure
+
+uri: https://github.com/dthaler/gedcom-citations/yaml/_FIEL-TEXT
+
+standard tag: TEXT
+
+specification:
+  - Field Value
+  - |
+    The property value of a citation element.
+
+label: 'Field Name'
+
+payload: http://www.w3.org/2001/XMLSchema#string
+
+substructures: {}
+
+superstructures:
+  "https://github.com/dthaler/gedcom-citations/yaml/_FIEL": "{0:M}"
+...
