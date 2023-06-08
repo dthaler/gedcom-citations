@@ -1,0 +1,26 @@
+%YAML 1.2
+---
+lang: en-US
+
+type: structure
+
+uri: https://github.com/dthaler/gedcom-citations/_CITE
+
+extension tags:
+  - _CITE
+
+specification:
+  - Citation
+  - |
+    A set of source citations for a cited source.
+
+label: 'Citation'
+
+payload: null
+
+substructures:
+  "https://gedcom.io/terms/v7/SOUR": "{1:M}"
+
+superstructures:
+  "https://gedcom.io/terms/v7/PAGE": "{0:1}"
+...
