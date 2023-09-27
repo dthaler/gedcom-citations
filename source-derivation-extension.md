@@ -13,12 +13,6 @@ source was derived in some way from another source.
 
 See also the [`_CITE` YAML file](yaml/_CITE.yaml) for more details.
 
-Open Questions:
-
-1. Is `PAGE` the correct superstructure?
-2. Should we have a `TYPE` enumeration for type of derivation
-   (copy, translation, transcript, abridgement, etc.)?
-
 ## GEDCOM Schema
 
 ```
