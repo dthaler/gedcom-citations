@@ -33,3 +33,30 @@ n SOUR @<XREF:SOUR>@                    {1:1}  g7:SOUR
 ### `_CITE` (Citation)  `ext:_CITE`
 
 A set of source citations for a cited source.
+
+### Example
+
+The following example is taken from the "Church records database, online"
+QuickCheck Model on page 320 of "Evidence Explained", which has a first
+(full) reference note of:
+
+1. Joseph M. Lalley Jr., "Baptismal Records, Wilmington, Delaware,"
+   database, *19th Century Immigrant Roots: Records for Wilmington,
+   Delaware, USA, and Vicinity* (http://www.lalley.com : accessed 28 January
+   2007), entry for John Keely, baptized 26 August 1888; citing St. Paul
+   Church Baptisms, December 1869-August 1893, p. 214.
+
+```
+0 @I1@ INDI
+1 SOUR @S1@
+2 PAGE entry for John Keely, baptized 26 August 1888
+3 _CITE
+4 SOUR @S2@
+5 PAGE 214
+0 @S1@ SOUR
+1 AUTH Joseph M. Lalley Jr.
+1 TITL Baptismal Records, Wilmington, Delaware
+2 PUBL http://www.lalley.com : accessed 28 January 2007
+0 @S2@ SOUR
+1 TITL St. Paul Church Baptisms, December 1869-August 1893
+```
