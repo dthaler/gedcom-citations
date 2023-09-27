@@ -22,7 +22,7 @@ Rather than write out URIs in full, we use prefix notation: any URI beginning wi
 of the following short prefixes followed by a colon is shorthand for a URI beginning
 with the corresponding URI prefix
 
-| Short Prefix | URI Prefix                                     |
-|:-------------|:-----------------------------------------------|
-| `g7`         | `https://gedcom.io/terms/v7/`                  |
-| `ext`        | `https://github.com/dthaler/gedcom-citations/` |
+| Short Prefix | URI Prefix                                          |
+|:-------------|:----------------------------------------------------|
+| `g7`         | `https://gedcom.io/terms/v7/`                       |
+| `ext`        | `https://github.com/dthaler/gedcom-citations/yaml/` |
