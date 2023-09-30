@@ -13,6 +13,13 @@ source was derived in some way from another source.
 
 See also the [`_CITE` YAML file](yaml/_CITE.yaml) for more details.
 
+**Note**: The `_CITE` structure is used here only as a way to allow a YAML file that can be used for
+automatic validation.  A
+[*relocated standard structure*](https://github.com/FamilySearch/GEDCOM/blob/main/specification/gedcom-1-hierarchical-container-format.md#extensions)
+today does not allow a separate YAML file, but there is an
+[issue](https://github.com/FamilySearch/GEDCOM.io/issues/97) to track changing this in some way
+that might allow removal of the `_CITE` structure from this proposal.
+
 ## GEDCOM Schema
 
 ```
