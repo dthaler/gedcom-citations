@@ -11,14 +11,16 @@ that a data model should support, including provenance.  It notes:
 The proposed Source Derivation GEDCOM Extension allows recording that a
 source was derived in some way from another source.
 
-See also the [`_CITE` YAML file](yaml/_CITE.yaml) for more details.
+See also the [`_SOUR` YAML file](yaml/_SOUR.yaml) for more details.
 
-**Note**: The `_CITE` structure is used here only as a way to allow a YAML file that can be used for
-automatic validation.  A
+**Note**: the `_SOUR` YAML file is an anomaly here since `_SOUR` is a
 [*relocated standard structure*](https://github.com/FamilySearch/GEDCOM/blob/main/specification/gedcom-1-hierarchical-container-format.md#extensions)
-today does not allow a separate YAML file, but there is an
-[issue](https://github.com/FamilySearch/GEDCOM.io/issues/97) to track changing this in some way
-that might allow removal of the `_CITE` structure from this proposal.
+which means it reuses the `g7:SOUR` URI, which has its own
+[YAML file](https://github.com/FamilySearch/GEDCOM-registries/blob/main/structure/standard/SOUR.yaml) already.
+There is an [issue](https://github.com/FamilySearch/GEDCOM.io/issues/97) tracking
+possible ways to allow automated validation of relocated standard structures,
+such as a wrapper YAML file.  In that light, an example YAML file is provided here that
+may be used to help construct such a proposal.
 
 ## GEDCOM Schema
 
@@ -27,13 +29,15 @@ n SOUR @<XREF:SOUR>@                    {1:1}  g7:SOUR
    ...
   +1 PAGE <Text>                        {0:1}  g7:PAGE
       ...
-     +2 _CITE                           {0:1}  ext:_CITE
-        +3 <<SOURCE_CITATION>>          {1:M}
+     +2 _SOUR                           {0:M}  g7:SOUR
+        ...
 ```
 
-### `_CITE` (Citation)  `ext:_CITE`
+### `_SOUR` (Source)  `g7:_SOUR`
 
-A set of source citations for a cited source.
+This relocated standard structure allows a `<<SOURCE_CITATION>>`
+to appear as a substructure of `PAGE`, to indicate a
+source citation for a cited source.
 
 ### Example
 
@@ -51,9 +55,8 @@ QuickCheck Model on page 320 of "Evidence Explained", which has a first
 0 @I1@ INDI
 1 SOUR @S1@
 2 PAGE entry for John Keely, baptized 26 August 1888
-3 _CITE
-4 SOUR @S2@
-5 PAGE 214
+3 _SOUR @S2@
+4 PAGE 214
 0 @S1@ SOUR
 1 AUTH Joseph M. Lalley Jr.
 1 TITL Baptismal Records, Wilmington, Delaware
