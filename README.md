@@ -13,7 +13,7 @@ Extensions
 
 The following extensions are proposed for discussion:
 
-* (to be added)
+* [Source Derivation Extension](source-derivation-extension.md)
 
 All proposed extensions use [documented extension tags](https://gedcom.io/specifications/FamilySearchGEDCOMv7.html#extension-tags).  If they later become incorporated into the FamilySearch GEDCOM standard,
 standard tags will be defined at that time.
