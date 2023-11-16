@@ -24,22 +24,22 @@ may be used to help construct such a proposal.
 
 ## GEDCOM Schema
 
-```
-n SOUR @<XREF:SOUR>@                    {1:1}  g7:SOUR
-   ...
-  +1 PAGE <Text>                        {0:1}  g7:PAGE
-      ...
-     +2 _SOUR                           {0:M}  g7:SOUR
-        ...
-```
-
 ### `_SOUR` (Source)  `g7:_SOUR`
 
 This relocated standard structure allows a `<<SOURCE_CITATION>>`
-to appear as a substructure of `PAGE`, to indicate a
+to appear as a substructure of `SOUR`, to indicate a
 source citation for a cited source.
 
-### Example
+### `SOURCE_CITATION`
+
+```gedstruct
+n SOUR @<XREF:SOUR>@                    {1:1}  g7:SOUR
+   ...
+  +1 _SOUR                              {0:M}  g7:SOUR
+   ...
+```
+
+#### Example
 
 The following example is taken from the "Church records database, online"
 QuickCheck Model on page 320 of "Evidence Explained", which has a first
@@ -55,12 +55,25 @@ QuickCheck Model on page 320 of "Evidence Explained", which has a first
 0 @I1@ INDI
 1 SOUR @S1@
 2 PAGE entry for John Keely, baptized 26 August 1888
-3 _SOUR @S2@
-4 PAGE 214
+2 _SOUR @S2@
+3 PAGE 214
 0 @S1@ SOUR
 1 AUTH Joseph M. Lalley Jr.
 1 TITL Baptismal Records, Wilmington, Delaware
 2 PUBL http://www.lalley.com : accessed 28 January 2007
 0 @S2@ SOUR
 1 TITL St. Paul Church Baptisms, December 1869-August 1893
+```
+
+### `SOURCE_RECORD`
+
+A `SOURCE_RECORD` can contain a source citation when the entire
+record is derived from the same source, such as when it is a
+translation of a source in another language.
+
+```gedstruct
+n @XREF:SOUR@ SOUR               {1:1}  g7:record-SOUR
+   ...
+  +1 _SOUR                       {0:M}  g7:SOUR
+   ...
 ```
