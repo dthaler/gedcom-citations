@@ -1,0 +1,27 @@
+%YAML 1.2
+---
+lang: en-US
+
+type: structure
+
+uri: https://github.com/dthaler/gedcom-citations/yaml/_FIEL
+
+extension tags:
+  - _FIEL
+
+specification:
+  - Field Name
+  - |
+    The property name of a citation element.
+
+label: 'Field Name'
+
+payload: http://www.w3.org/2001/XMLSchema#string
+
+substructures:
+  "https://github.com/dthaler/gedcom-citations/yaml/FIEL-TEXT": "{1:1}"
+
+superstructures:
+  "https://github.com/dthaler/gedcom-citations/yaml/_TPLT": "{0:M}"
+  "https://gedcom.io/terms/v7/PAGE": "{0:M}"
+...
