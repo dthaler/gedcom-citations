@@ -52,7 +52,7 @@ A few examples include:
 [Citations and the GEDCOM (evidentiasoftware.com)](https://evidentiasoftware.com/citations-and-the-gedccom/) and [Easier Source Citation With Your Genealogy Software (familytreemagazine.com)](https://www.geneamusings.com/2011/02/peeking-at-rootsmagic-4-source.html)
 discuss a number of popular genealogy applications that appear to use source templates, including
 Family Tree Maker, RootsMagic, and Legacy.  Source templates are also used by various other
-FamilySearch-certified applications, such as MagiKey Family Tree.
+FamilySearch-certified applications, including Family Historian and MagiKey Family Tree.
 
 #### RootsMagic 6
 
@@ -117,6 +117,84 @@ And escapes are supported as follows:
 > If you ever want to write an actual <, >, /, [, or ] in your sentence, you must precede it by a "/".
 
 While the above patterns are powerful, readable, and short, the use of / as an escape character is surprising, and the use of <> can be confusing due to use of HTML.  And of course the syntax is proprietary, not based on any open standard or language or open source de facto standard.
+
+#### Family Historian 7
+
+As discussed in Family Historian's [Sources and Source Templates](https://www.family-historian.co.uk/help/fh7/sourcesandsourcetemplates.html)
+and [Source Template Formats](https://www.family-historian.co.uk/help/fh7/sourcetemplateformats.html) documents,
+Family Historian 7 supports creating sources from source templates, and appears to allow users to define their own
+as well.  Like RootsMagic, the syntax is proprietary, not based on any open standard or language
+or open source defacto standard.
+
+As covered in the last document above, the syntax of patterns it uses to construct formatted citations uses
+`{}` around field names, such as:
+
+```
+Manuscript Record Document: {Collection} - {Document_Title}
+```
+
+where "{Collection}" and "{Document_Title}" refer to "Collection" and "Document Title" fields.  It distinguishes
+between "citation-specific field codes" that are not valid in the context of bibliography entries for example,
+and other fields. Thus, "citation-specific field codes" appear to apply to a GEDCOM `SOURCE_CITATION` rather than
+a `SOURCE_RECORD`.
+
+Family Historian 7 allows a limited set of HTML codes in templates as well, including `<i>`, `<b>`, `<u>`, and
+`<caps>`, and uses `\` as an escape to allow literal characters like `\<`.
+
+It supports a set of "field code qualifiers" that map to conceptual functions on a single field, such as
+`:YEAR` which extracts the year from a field containing a date.  It also supposed a set of explicit functions,
+using a syntax like `=ToUpper("McKinley")` with a number of arguments defined by the function.
+
+It also supports a set of expressions, such as:
+
+* `<({code1}, {code2} and {code3})>` where the `(` prefix and `)` suffix are output if any of the codes are
+  non-empty and the `, ` and ` and ` separators are displayed if any expression to the left is non-empty and
+  the one immediately to the right is non-empty, so you get `(apple, pear)` if code1=apple, code2=pear, and code3 is
+  blank.
+* nested angle-bracket expressions
+* `<{code1}|EMPTY!>` to display "EMPTY!" if code1 is blank
+* `<{code1}|{code2}|{code3}>` to display alternatives if a code is blank, with a variable number of alternatives
+  allowed.
+
+In top level (not within angle brackets) expressions, some characters are treated specially, including
+`.`, `;`, `,`, `:`, `-`, and ` `, where they are only output under specific conditions.
+
+It also allows [data references](https://www.family-historian.co.uk/help/fh7/understandingdatareferences.html)
+that can be used to navigate the equivalent of GEDCOM.  For example, in a data reference for an individual (not
+a source), `%INDI.FAMC[2]>HUSB>NAME%` would get the father's name in the second family the individual is a child in,
+so presumably something like `%SOUR.REPO[2]>CALN%` would get the source's call number in the second repository
+associated with the source record.
+
+As noted in [Export Gedcom File Dialog](https://www.family-historian.co.uk/help/fh7/exportgedcomfile.html),
+source templates can be exported as GEDCOM records using a GEDCOM extension.  The source templates themselves
+are not present in GEDCOM files, only the fields defined in a template, which are under a `SOURCE_CITATION` or
+a `SOURCE_RECORD`.  For example, citation-specific fields appear as:
+
+```gedcom
+2 SOUR @S4@
+3 _FIELD TX-PAGE
+4 TEXT 35
+```
+
+In the above example, a custom text (TX) field named "PAGE" is defined, whose value is "35".  No `PAGE`
+structure is present, so citation-specific fields do not transfer to other programs that don't recognize
+Family Historian's extension.
+
+Non-citation-specific fields appear as, for example:
+
+```gedcom
+0 @S4@ SOUR
+1 _FIELD TX-NAME
+2 TEXT My name
+1 _FIELD DT-DATE
+2 DATE 2023
+1 TITL My name, 2023
+```
+
+In the above example, a custom text (TX) field named "NAME" and a custom date (DT) field named "DATE" are defined,
+with values of "My name" and "2023", respectively. An expression defined by the template, but not exported in
+GEDCOM files, is used to generate the `TITL` so that these fields can transfer to other programs as a generic
+`TITL`.
 
 #### Family Tree Maker 2012
 
@@ -195,16 +273,16 @@ to generate HTML-formatted output, where `$Name` indicates a variable expansion.
 user-friendly facility for creating custom templates is currently provided (though it
 could be done by manually editing additional text files).
 
-Like RootsMagic's use of "Reverse" and "Year" above, MagiKey Family Tree also supports
-transforms using a function syntax, where the transforms are well-known, not per template.  For example:
+Like RootsMagic and Family Historian, MagiKey Family Tree also supports
+functions, where the functions are well-known, not per template.  For example:
 
 ```
  "<i>" $html($newspapername($Newspaper, $Location)) "</i>"
 ```
 
-Like RootsMagic, the syntax is proprietary, not based on any open standard or language
+Like RootsMagic and Family Historian, the syntax is proprietary, not based on any open standard or language
 or open source defacto standard, but it is very similar to standard programming languages.
-On the other hand, it is much more verbose than RootsMagic's template language.
+On the other hand, it is much more verbose than RootsMagic's and Family Historian's template languages.
 
 ## Source Template GEDCOM Extension
 
@@ -228,7 +306,8 @@ And preferably:
 - Safety, in that a user-defined custom pattern cannot do arbitrary things (e.g., infinite loops).
 - Avoid confusion between HTML markup and other operations such as conditional checks.
 
-Some possibilities (in addition to the custom ones in RootsMagic and MagiKey Family Tree) include more powerful programming languages such
+Some possibilities (in addition to the custom ones in RootsMagic, Family Historian, and MagiKey Family Tree)
+include more powerful programming languages such
 as Perl, Tcl, Python, AWK, Lua, and Ruby. [c - Embeddable language with good string manipulation support - Stack Overflow](https://stackoverflow.com/questions/1281073/embeddable-language-with-good-string-manipulation-support)
 and [Why is Perl the best choice for most string manipulation tasks? - Stack Overflow](https://stackoverflow.com/questions/1490745/why-is-perl-the-best-choice-for-most-string-manipulation-tasks) has some discussion.  However, these tend to fail the goal of safety.
 
