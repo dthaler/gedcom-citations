@@ -36,9 +36,9 @@ dynamically from a set of stored citation elements, rather than stored fully in 
 
 A few examples include:
 
-- EasyBib (http://www.easybib.com/cite/form) has a web entry form and can generate citations in a variety of citation formats, including APA, Chicago, MLA, Turabian, etc.
-- EndNote (https://clarivate.com/webofsciencegroup/support/endnote/) manages source and can generate citations in a variety of formats (see for example position 6:00 in the Windows video), including APA, Chicago, Turabian, etc.
-- The OCLC Citations API (https://developer.api.oclc.org/citations-api) can access the WorldCat database and generate citations in a variety of formats (see CitationStyle), including APA, Chicago, MLA, Turabian, etc.
+- EasyBib (<http://www.easybib.com/cite/form>) has a web entry form and can generate citations in a variety of citation formats, including APA, Chicago, MLA, Turabian, etc.
+- EndNote (<https://clarivate.com/webofsciencegroup/support/endnote/>) manages source and can generate citations in a variety of formats (see for example position 6:00 in the Windows video), including APA, Chicago, Turabian, etc.
+- The OCLC Citations API (<https://developer.api.oclc.org/citations-api>) can access the WorldCat database and generate citations in a variety of formats (see CitationStyle), including APA, Chicago, MLA, Turabian, etc.
 
 [Citations: Goals and Considerations (fhiso.org)](https://fhiso.org/TR/citation-goals) also explains:
 
@@ -147,13 +147,13 @@ using a syntax like `=ToUpper("McKinley")` with a number of arguments defined by
 
 It also supports a set of expressions, such as:
 
-* `<({code1}, {code2} and {code3})>` where the `(` prefix and `)` suffix are output if any of the codes are
+- `<({code1}, {code2} and {code3})>` where the `(` prefix and `)` suffix are output if any of the codes are
   non-empty and the `, ` and ` and ` separators are displayed if any expression to the left is non-empty and
   the one immediately to the right is non-empty, so you get `(apple, pear)` if code1=apple, code2=pear, and code3 is
   blank.
-* nested angle-bracket expressions
-* `<{code1}|EMPTY!>` to display "EMPTY!" if code1 is blank
-* `<{code1}|{code2}|{code3}>` to display alternatives if a code is blank, with a variable number of alternatives
+- nested angle-bracket expressions
+- `<{code1}|EMPTY!>` to display "EMPTY!" if code1 is blank
+- `<{code1}|{code2}|{code3}>` to display alternatives if a code is blank, with a variable number of alternatives
   allowed.
 
 In top level (not within angle brackets) expressions, some characters are treated specially, including
@@ -353,23 +353,23 @@ The following [JSON schema](https://datatracker.ietf.org/doc/html/draft-bhutton-
   "properties": {
     "lang": {
       "type": "string",
-      "description": "IANA language tag of the language of this template.",
+      "description": "IANA language tag of the language of this template."
     },
     "uri": {
       "type": "string",
-      "description": "The URI of this source template.",
+      "description": "The URI of this source template."
     },
     "name": {
       "type": "string",
-      "description": "Textual name which could be displayed to users in a list of source templates.",
+      "description": "Textual name which could be displayed to users in a list of source templates."
     },
     "description": {
       "type": "string",
-      "description": "Textual description which could be displayed to users in a list of source templates.",
+      "description": "Textual description which could be displayed to users in a list of source templates."
     },
     "collection": {
       "type": "string",
-      "description": "URI of the source template for the containing collection.",
+      "description": "URI of the source template for the containing collection."
     },
     "keywords": {
       "type": "array",
@@ -386,19 +386,19 @@ The following [JSON schema](https://datatracker.ietf.org/doc/html/draft-bhutton-
         "properties": {
           "variable": {
             "type": "string",
-            "description": "Machine-readable variable name of the citation element.",
+            "description": "Machine-readable variable name of the citation element."
           },
           "label": {
             "type": "string",
-            "description": "Human-readable label associated with the citation element.",
+            "description": "Human-readable label associated with the citation element."
           },
           "required": {
             "type": "boolean",
-            "description": "Whether the citation element is required to have a  non-empty value.",
+            "description": "Whether the citation element is required to have a non-empty value."
           },
         },
         "required": ["variable", "label"],
-        "additionalProperties": false,
+        "additionalProperties": false
       }
     },
     "dfields": {
@@ -409,28 +409,28 @@ The following [JSON schema](https://datatracker.ietf.org/doc/html/draft-bhutton-
         "properties": {
           "variable": {
             "type": "string",
-            "description": "Machine-readable variable name of the citation element.",
+            "description": "Machine-readable variable name of the citation element."
           },
           "label": {
             "type": "string",
-            "description": "Human-readable label associated with the citation element.",
+            "description": "Human-readable label associated with the citation element."
           },
           "required": {
             "type": "boolean",
-            "description": "Whether the citation element is required to have a  non-empty value.",
+            "description": "Whether the citation element is required to have a non-empty value."
           },
         },
         "required": ["variable", "label"],
-        "additionalProperties": false,
+        "additionalProperties": false
       }
     },
     "repository": {
       "type": "boolean",
-      "description": "Whether this type of source would normally require listing whose possession the source is in (i.e., the repository). This should be true for unique items such as a family bible, diary, or letter. Defaults to false if not present.",
+      "description": "Whether this type of source would normally require listing whose possession the source is in (i.e., the repository). This should be true for unique items such as a family bible, diary, or letter. Defaults to false if not present."
     },
     "quality": {
       "type": "number",
-      "description": "An enumerated value from set g7:enumset-QUAY indicating the credibility of the type of source as a whole. For example, a birth certificate might be Primary, whereas a family bible might be Secondary (since the information may have been recorded at a later time). If this structure is not present, it is the same as if Questionable (1) had been specified. Note: The structures for representing the strength of and confidence in various claims are known to be inadequate and are likely to change in a future version of this specification.",
+      "description": "An enumerated value from set g7:enumset-QUAY indicating the credibility of the type of source as a whole. For example, a birth certificate might be Primary, whereas a family bible might be Secondary (since the information may have been recorded at a later time). If this structure is not present, it is the same as if Questionable (1) had been specified. Note: The structures for representing the strength of and confidence in various claims are known to be inadequate and are likely to change in a future version of this specification."
     },
     "formats": {
       "type": "array",
@@ -440,39 +440,39 @@ The following [JSON schema](https://datatracker.ietf.org/doc/html/draft-bhutton-
         "properties": {
           "name": {
             "type": "string",
-            "description": "The name of the citation format.",
+            "description": "The name of the citation format."
           },
           "abbr": {
             "type": "string",
-            "description": "Pattern that specifies how to construct an abbreviated title for the master source. The abbreviated title constructed can be displayed in a source list when the source record does not have an ABBR structure. (An implementation might store the abbreviated title constructed in an ABBR structure, but this is not required.) The payload must not contain variables defined in the dfields array, but may contain variables defined in the sfields array, and if a collection is specified then it may also use the variable \"CollectionAbbr\" which will expand to the collection's abbreviated title.",
+            "description": "Pattern that specifies how to construct an abbreviated title for the master source. The abbreviated title constructed can be displayed in a source list when the source record does not have an ABBR structure. (An implementation might store the abbreviated title constructed in an ABBR structure, but this is not required.) The payload must not contain variables defined in the dfields array, but may contain variables defined in the sfields array, and if a collection is specified then it may also use the variable \"CollectionAbbr\" which will expand to the collection's abbreviated title."
           },
           "auth": {
             "type": "string",
-            "description": "Pattern that specifies how to construct an AUTH payload for the master source. The payload must not contain variables defined in the dfields array but may contain variables defined in the sfields array.",
+            "description": "Pattern that specifies how to construct an AUTH payload for the master source. The payload must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
           "titl": {
             "type": "string",
-            "description": "Pattern that specifies how to construct a TITL payload. The payload must not contain variables defined in the dfields array but may contain variables defined in the sfields array.",
+            "description": "Pattern that specifies how to construct a TITL payload. The payload must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
           "publ": {
             "type": "string",
-            "description": "Pattern that specifies how to construct a PUBL payload for the master source. The string must not contain variables defined in the dfields array but may contain variables defined in the sfields array.",
+            "description": "Pattern that specifies how to construct a PUBL payload for the master source. The string must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
           "page": {
             "type": "string",
-            "description": "Pattern that specifies how to construct a PAGE payload. The payload may contain variables defined in the dfields array or the sfields array.",
+            "description": "Pattern that specifies how to construct a PAGE payload. The payload may contain variables defined in the dfields array or the sfields array."
           },
           "caln": {
             "type": "string",
-            "description": "Pattern that specifies how to construct a CALN payload. The string must not contain variables defined in the dfields array but may contain variables defined in the sfields array.",
+            "description": "Pattern that specifies how to construct a CALN payload. The string must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
           "scite": {
             "type": "string",
-            "description": "Pattern that specifies how to construct an (HTML-format) citation string (known in EE as the \"First (Full) Reference Note\" in a QuickCheck Model), using only master source citation elements. That is, it must not contain any citation elements that would not appear in the master source (shown in EE's QuickCheck Models as the \"Source List Entry\"). The pattern must not contain variables defined in the dfields array but may contain variables defined in the sfields array.",
+            "description": "Pattern that specifies how to construct an (HTML-format) citation string (known in EE as the \"First (Full) Reference Note\" in a QuickCheck Model), using only master source citation elements. That is, it must not contain any citation elements that would not appear in the master source (shown in EE's QuickCheck Models as the \"Source List Entry\"). The pattern must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
           "dcite": {
             "type": "string",
-            "description": "A pattern that specifies how to construct the rest of the (HTML-format) citation string (known in EE as the \"First (Full) Reference Note\" in a QuickCheck Model), and is appended to the string constructed with the scite pattern. If no dcite string is specified, it defaults to \", \" followed by the PAGE payload.",
+            "description": "A pattern that specifies how to construct the rest of the (HTML-format) citation string (known in EE as the \"First (Full) Reference Note\" in a QuickCheck Model), and is appended to the string constructed with the scite pattern. If no dcite string is specified, it defaults to \", \" followed by the PAGE payload."
           },
           "alttitl": {
             "type": "array",
@@ -494,10 +494,10 @@ The following [JSON schema](https://datatracker.ietf.org/doc/html/draft-bhutton-
             "items": {
               "type": "string"
             }
-          },
+          }
         },
         "required": ["name", "titl", "scite"],
-        "additionalProperties": false,
+        "additionalProperties": false
       }
     }
   },
