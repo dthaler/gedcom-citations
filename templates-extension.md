@@ -395,7 +395,7 @@ The following [JSON schema](https://datatracker.ietf.org/doc/html/draft-bhutton-
           "required": {
             "type": "boolean",
             "description": "Whether the citation element is required to have a non-empty value."
-          },
+          }
         },
         "required": ["variable", "label"],
         "additionalProperties": false
@@ -418,7 +418,7 @@ The following [JSON schema](https://datatracker.ietf.org/doc/html/draft-bhutton-
           "required": {
             "type": "boolean",
             "description": "Whether the citation element is required to have a non-empty value."
-          },
+          }
         },
         "required": ["variable", "label"],
         "additionalProperties": false
