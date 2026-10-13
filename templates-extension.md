@@ -698,9 +698,7 @@ sfields:
 formats:
   - name: Evidence Explained
     titl: {{ Jurisdiction }}, {{ Series }}
-    publ: {{ Location }}
     scite: {{ Jurisdiction }}, {{ Series }}
-    page: {{ Section }}
 repository: true
 quality: 3
 ```
