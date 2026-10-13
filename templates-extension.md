@@ -794,13 +794,13 @@ Let's look at an example using the Web Database model from *Evidence Explained*,
 We will use the following YAML snippet as an example:
 
 ```
-    altpubl: {{ Type }}, {{ Creator }}, {{ Website }} ({{ Url }} : accessed {{ Date }})
-    altpubl: {{ Type }}, {{ Creator }}, {{ Website }} ({{ Url }})
-    altpubl: {{ Type }}, {{ Website }} ({{ Url }})
-    altpubl: {{ Website }} ({{ Url }})
-    altpubl: {{ Website }}
+    altpubl:
+      - "{{ Type }}, {{ Creator }}, {{ Website }} ({{ Url }} : accessed {{ Date }})"
+      - "{{ Type }}, {{ Creator }}, {{ Website }} ({{ Url }})"
+      - "{{ Type }}, {{ Website }} ({{ Url }})"
+      - "{{ Website }} ({{ Url }})"
+      - "{{ Website }}"
     publ: {% if Type %}{{ Type }}, {% endif %}{% if Creator %}{{ Creator }}, {% endif %}{{ Website }} ({{ Url }}{% if Date %} : accessed {{ Date }}{% endif %})
-```
 
 Above gives a number of patterns that can be recognized.  In this case, the `publ` pattern
 used for output is not particularly usable for input due to the use of conditionals, and the
