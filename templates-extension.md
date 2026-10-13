@@ -2,7 +2,7 @@
 
 ## Use of Property Sets and Templates
 
-[Citations: Goals and Considerations (fhiso.org)](https://fhiso.org/TR/citation-goals) says:
+[Citations: Goals and Considerations (fhiso.org)](https://web.archive.org/web/20230626185821/https://fhiso.org/TR/citation-goals) says:
 
 > Property set design requires a trade-off between complexity and expressiveness. Academic
 > property set citation standards typically have between 25 and 100 defined property names,
@@ -22,7 +22,7 @@ template.  There is not necessarily any expectation that two templates use the s
 name to refer to a common data element, nor that the same property name doesn't have different
 meanings in different templates.
 
-[Citations: Goals and Considerations (fhiso.org)](https://fhiso.org/TR/citation-goals) also says
+[Citations: Goals and Considerations (fhiso.org)](https://web.archive.org/web/20230626185821/https://fhiso.org/TR/citation-goals) also says
 that the "Property Sets and Templates" category of solutions does not support the Provenance or
 the Customise requirements.  However, the present proposal does support the Customise requirement.
 And the Provenance requirement is not precluded but will be covered in a separate extension
@@ -40,7 +40,7 @@ A few examples include:
 - EndNote (<https://clarivate.com/webofsciencegroup/support/endnote/>) manages source and can generate citations in a variety of formats (see for example position 6:00 in the Windows video), including APA, Chicago, Turabian, etc.
 - The OCLC Citations API (<https://developer.api.oclc.org/citations-api>) can access the WorldCat database and generate citations in a variety of formats (see CitationStyle), including APA, Chicago, MLA, Turabian, etc.
 
-[Citations: Goals and Considerations (fhiso.org)](https://fhiso.org/TR/citation-goals) also explains:
+[Citations: Goals and Considerations (fhiso.org)](https://web.archive.org/web/20230626185821/https://fhiso.org/TR/citation-goals) also explains:
 
 > *Property sets* and *templates* are used by BibTeX, CiteProc, CSL, EndNote, Zotero, and other
 > academic document preparation toolchains. *Citation data* is provided in this format by most
