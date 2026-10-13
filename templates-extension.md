@@ -504,11 +504,11 @@ The following [JSON schema](https://datatracker.ietf.org/doc/html/draft-bhutton-
             "type": "string",
             "description": "Pattern that specifies how to construct an abbreviated title for the master source. The abbreviated title constructed can be displayed in a source list when the source record does not have an ABBR structure. (An implementation might store the abbreviated title constructed in an ABBR structure, but this is not required.) The payload must not contain variables defined in the dfields array, but may contain variables defined in the sfields array, and if a collection is specified then it may also use the variable \"CollectionAbbr\" which will expand to the collection's abbreviated title."
           },
-          "titl": {
+          "auth": {
             "type": "string",
             "description": "Pattern that specifies how to construct an AUTH payload for the master source. The payload must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
-          "auth": {
+          "titl": {
             "type": "string",
             "description": "Pattern that specifies how to construct a TITL payload. The payload must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
@@ -516,19 +516,19 @@ The following [JSON schema](https://datatracker.ietf.org/doc/html/draft-bhutton-
             "type": "string",
             "description": "Pattern that specifies how to construct a PUBL payload for the master source. The string must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
-          "scite": {
+          "page": {
             "type": "string",
             "description": "Pattern that specifies how to construct a PAGE payload. The payload may contain variables defined in the dfields array or the sfields array."
           },
-          "page": {
+          "caln": {
             "type": "string",
             "description": "Pattern that specifies how to construct a CALN payload. The string must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
-          "slist": {
+          "scite": {
             "type": "string",
             "description": "Pattern that specifies how to construct an (HTML-format) citation string (known in EE as the \"First (Full) Reference Note\" in a QuickCheck Model), using only master source citation elements. That is, it must not contain any citation elements that would not appear in the master source (shown in EE's QuickCheck Models as the \"Source List Entry\"). The pattern must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
-          "first": {
+          "dcite": {
             "type": "string",
             "description": "A pattern that specifies how to construct the rest of the (HTML-format) citation string (known in EE as the \"First (Full) Reference Note\" in a QuickCheck Model), and is appended to the string constructed with the scite pattern. If no dcite string is specified, it defaults to \", \" followed by the PAGE payload."
           },
@@ -620,9 +620,9 @@ description: The Grave Marker model is used for tombstones and other types of
   grave markers (see "Evidence Explained", pages 213-214).  It is not used for
   digital images found online; for those use the Website model instead.
 keywords:
-  - monument
-  - headstone
+  - tombstone
   - cemetery
+  - headstone
 sfields:
   - variable: Cemetery
     label: Cemetery
