@@ -10,13 +10,13 @@ This document uses the following terminology:
 
 **Source Details:** The part of a source relevant to a specific fact, such as a specific page or entry.  In GEDCOM this is a `SOURCE_CITATION` that points to the source record.
 
-**Citation Element:** As defined in [Citation Elements: Concepts (fhiso.org)](https://fhiso.org/TR/cev-concepts), a logically self-contained piece of information in a citation layer that might reasonably be included in a formatted citation.  RootsMagic calls this a `FIELD` structure in GEDCOM.
+**Citation Element:** As defined in [Citation Elements: Concepts (fhiso.org)](https://web.archive.org/web/20231003225651/https://fhiso.org/TR/cev-concepts), a logically self-contained piece of information in a citation layer that might reasonably be included in a formatted citation.  RootsMagic calls this a `FIELD` structure in GEDCOM.
 
-**Formatted Citation:** As defined in [Citation Elements: Concepts (fhiso.org)](https://fhiso.org/TR/cev-concepts), a citation that has been rendered into human-readable form, typically as a sentence or short paragraph that might be used as a footnote, endnote, tablenote or bibliography entry. There is no single standard on the correct form of formatted citations; many different style guides exist, each giving their own rules on how to construct a formatted citation.
+**Formatted Citation:** As defined in [Citation Elements: Concepts (fhiso.org)](https://web.archive.org/web/20231003225651/https://fhiso.org/TR/cev-concepts), a citation that has been rendered into human-readable form, typically as a sentence or short paragraph that might be used as a footnote, endnote, tablenote or bibliography entry. There is no single standard on the correct form of formatted citations; many different style guides exist, each giving their own rules on how to construct a formatted citation.
 
 ## Requirements
 
-[Citations: Goals and Considerations (fhiso.org)](https://fhiso.org/TR/citation-goals) lists some things
+[Citations: Goals and Considerations (fhiso.org)](https://web.archive.org/web/20230626185821/https://fhiso.org/TR/citation-goals) lists some things
 that a data model should support:
 
 - **Display:** Some operations on citations require a formatted presentation that can be displayed to the user and printed out.
