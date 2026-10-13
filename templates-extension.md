@@ -287,7 +287,7 @@ On the other hand, it is much more verbose than RootsMagic's and Family Historia
 ## Purpose
 
 Many types of sources exist with a common set of elements that can be used to format a citation.
-In order to facilitate formatting of consistent citations, it is desirable to allow
+To facilitate formatting of consistent citations, it is desirable to allow
 specifying such information with a master source.
 
 This extension adds a tag, `_TPLT`, to allow recording the fact that a given master source
@@ -313,7 +313,7 @@ The URI for this extension's `_TPLT` tag is `ext:_TPLT`.
 
 The `_TPLT` structure is used as a substructure of the `SOUR` structure as follows:
 
-```
+```gedstruct
 n SOUR @XREF:SOUR@                          {1:1}  g7:record-SOUR
   +1 <<SOUR_DETAIL>>                        {0:1}
      +2 _TPLT <URI>                         {0:1}  ext:_TPLT
@@ -336,7 +336,7 @@ The `_TPLT` substructures are:
 In addition to the `_TPLT` substructure added in this extension, use of a `_TPLT` together with a source collection requires adding support for the following
 substructure of the `SOUR` structure:
 
-```
+```gedstruct
 n SOUR @XREF:SOUR@                          {1:1}  g7:record-SOUR
   +1 <<SOUR_DETAIL>>                        {0:1}
      +2 _TPLT <URI>                         {0:1}  ext:_TPLT
@@ -598,9 +598,9 @@ Creating a first reference note for a citation to a source with a template:
 2. The application prompts the user to enter values for citation elements as specified by the `dfields` array in the source template.
 3. The application sets the `PAGE` value by generated using the `page` template pattern in the source template.  If a template pattern is not specified in the source template, the GEDCOM tag is omitted.
 4. The application generates text for the citation using the `first` template pattern.  If such a pattern is not present, the following template pattern is used instead: `{% if scite %}{{ scite }}{% else %}{{ TITL }}{% if AUTH %}, by {{ AUTH }}{% endif %}{% if PUBL %} ({{ PUBL }}){% endif %}{% endif %}{% if PAGE %}, {{ PAGE }}{% endif %}{% if URL %}; {{ URL }}{% endif %}{% if NOTE %}. {{ NOTE }}{% endif %}.`  When evaluating this template pattern, the application substitutes values as follows:
-   * Any field appearing in the source template (whether in the `sfields` or `dfields` arrays) uses the value entered by the user.
-   * If the pattern `scite` appears in the source template, it is expanded using the template pattern there.
-   * Otherwise variables are expanded using the value of the corresponding GEDCOM tag.
+   - Any field appearing in the source template (whether in the `sfields` or `dfields` arrays) uses the value entered by the user.
+   - If the pattern `scite` appears in the source template, it is expanded using the template pattern there.
+   - Otherwise variables are expanded using the value of the corresponding GEDCOM tag.
 5. The application creates `_FIEL` substructures of the `PAGE` with variables and values of any citation elements that (a) are in the `dfields` of the source template, and (b) have non-empty values.
 
 ## Examples of Source Templates
