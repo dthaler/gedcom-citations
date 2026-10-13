@@ -606,7 +606,7 @@ The following examples show the YAML text, which can be placed into `.yaml` file
 
 ### Grave Marker Template
 
-The Grave Marker example is taken from the monument example at *Evidence Explained*, pages 246-247.
+The Grave Marker example is taken from the example at *Evidence Explained*, pages 213-214.
 
 #### Grave Marker YAML
 
