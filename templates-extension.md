@@ -124,7 +124,7 @@ As discussed in Family Historian's [Sources and Source Templates](https://www.fa
 and [Source Template Formats](https://www.family-historian.co.uk/help/fh7/sourcetemplateformats.html) documents,
 Family Historian 7 supports creating sources from source templates, and appears to allow users to define their own
 as well.  Like RootsMagic, the syntax is proprietary, not based on any open standard or language
-or open source defacto standard.
+or open source de facto standard.
 
 As covered in the last document above, the syntax of patterns it uses to construct formatted citations uses
 `{}` around field names, such as:
@@ -281,61 +281,119 @@ functions, where the functions are well-known, not per template.  For example:
 ```
 
 Like RootsMagic and Family Historian, the syntax is proprietary, not based on any open standard or language
-or open source defacto standard, but it is very similar to standard programming languages.
+or open source de facto standard, but it is very similar to standard programming languages.
 On the other hand, it is much more verbose than RootsMagic's and Family Historian's template languages.
 
-## Source Template GEDCOM Extension
+## Purpose
 
-This section proposes a GEDCOM extension for use of source templates.
+Many types of sources exist with a common set of elements that can be used to format a citation.
+To facilitate formatting of consistent citations, it is desirable to allow
+specifying such information with a master source.
 
-### Patterns
+This extension adds a tag, `_TPLT`, to allow recording the fact that a given master source
+has citation elements in common with other similar sources.
 
-This proposal relies on agreement on picking a pattern format.  A pattern format must
-support the following requirements:
+This extension also allows associating citation elements with a given source, by use of
+new tags that can be used together with the `_TPLT` tag to allow applications to prompt
+for, store, and generate citations for various types of sources.
 
-- Citation element expansion
-- Output using a subset of HTML
-- Conditional checks (e.g., for citation element empty and non-empty), including nested conditional checks
-- Able to support a set of standard transforms
-- Using patterns not only for output, but also for matching input, to aid in constructing a templated source citation from a non-templated one
+## Tags
 
-And preferably:
+### `_TPLT` (Source Template)
 
-- Has an interpreter implemented in existing open source libraries in a variety of programming languages.
-- Minimal overhead.
-- Safety, in that a user-defined custom pattern cannot do arbitrary things (e.g., infinite loops).
-- Avoid confusion between HTML markup and other operations such as conditional checks.
+A substructure to identify a Source Template that contains additional information on how data should be captured for the associated source and how those data should be combined to create a citation.
 
-Some possibilities (in addition to the custom ones in RootsMagic, Family Historian, and MagiKey Family Tree)
-include more powerful programming languages such
-as Perl, Tcl, Python, AWK, Lua, and Ruby. [c - Embeddable language with good string manipulation support - Stack Overflow](https://stackoverflow.com/questions/1281073/embeddable-language-with-good-string-manipulation-support)
-and [Why is Perl the best choice for most string manipulation tasks? - Stack Overflow](https://stackoverflow.com/questions/1490745/why-is-perl-the-best-choice-for-most-string-manipulation-tasks) has some discussion.  However, these tend to fail the goal of safety.
+#### `_TPLT`
 
-Other pattern languages that allow empty/non-empty checks with parameter expansion include:
+Source Templates allow applications to give users a set of data to capture for a given source type
+(such as a grave marker, obituary, will, etc.) and how such data should be formatted in a footnote citation.
+Source templates might be published as standard source templates or might be specific to a given application.
 
-- [Bash shell parameter expansion](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html), which isn't available in a library form usable in other projects
-- [XSLT](https://www.w3.org/TR/1999/REC-xslt-19991116), which is designed for transforming XML documents into other XML documents
+The URI for this extension's `_TPLT` tag is `ext:_TPLT`.
 
-Since there does not seem to already be general open source libraries that simply do what we want, it seems that specifying our own pattern language is the only viable option.
+The `_TPLT` structure is used as a substructure of the `SOUR` structure as follows:
 
-Using a bash-style syntax would seem to be the closest to a standard, while avoiding confusion between HTML markup and non-HTML operations.
+```gedstruct
+n SOUR @XREF:SOUR@                          {1:1}  g7:record-SOUR
+  +1 <<SOUR_DETAIL>>                        {0:1}
+     +2 _TPLT <URI>                         {0:1}  ext:_TPLT
+        +3 _FIEL <Text>                     {0:M}  ext:_FIEL
+           +4 TEXT <Text>                   {0:1}  g7:TEXT
+              +5 MIME <MediaType>           {0:1}  g7:MIME
+              +5 LANG <Language>            {0:1}  g7:LANG
+        +3 SOUR @<XREF:SOUR>@               {0:1}  g7:SOUR
+```
 
-#### Bash-style patterns
+The source template's payload is a [URI](https://www.rfc-editor.org/info/rfc3986) where the source template definition can be found.
 
-`${variable}`
-:Replace with the value of the specified variable.
+The `_TPLT` substructures are:
 
-`${variable:-text}`
-:If variable is non-empty, replace with its value. Otherwise replace with the specified text, which may itself have bash-style patterns.
+`_FIEL` (Field)
+: A field or parameter from the source template. The payload contains the machine-readable variable name from the source template. The name displayed to users may be something else, such as the human-readable label from the source template.
 
-`${variable:+text}`
-:If variable is empty, do nothing. Otherwise replace with the specified text, which may itself have bash-style patterns.
+### `SOUR` (Source)
 
-`\$`
-:Use escaped character ($) literally.
+In addition to the `_TPLT` substructure added in this extension, use of a `_TPLT` together with a source collection requires adding support for the following
+substructure of the `SOUR` structure:
 
-`$(function arg1 arg2)`
-:Replace with the output of the specified function, passing the specified arguments (two in this example).	
+```gedstruct
+n SOUR @XREF:SOUR@                          {1:1}  g7:record-SOUR
+  +1 <<SOUR_DETAIL>>                        {0:1}
+     +2 _TPLT <URI>                         {0:1}  ext:_TPLT
+        +3 SOUR @<XREF:SOUR>@               {0:1}  g7:SOUR
+```
+
+The `SOUR` substructure is used to identify a collection that the `SOUR` is contained in, such as when using a source template that is for a source within a collection.
+
+## Definitions
+
+Master Source
+: A `g7:record-SOUR`.
+
+Source Detail
+: A `g7:SOUR` substructure of an `INDI` or `FAM` record.
+
+Citation
+: Data that would be output when displaying the associated source in a source list entry, first reference note, or short subsequent note.
+
+Citation Element
+: A piece of information about a source, such as its author, title, publication date, repository, URL, etc.
+
+Source Template
+: A set of information about a class of sources, with a common set of citation elements and rules for formatting citations of sources of that class.
+
+## Extensions to the `SOUR` structure
+
+### Overview
+
+This extension adds the following substructure to an existing `SOUR` structure:
+
+- A `_TPLT` substructure whose payload is the URI of a source template.
+- Multiple `_FIEL` substructures of the `_TPLT` that provide values of citation elements for the master source as specified by the source template, if any.
+- `_FIEL` substructures of a `g7:SOUR` `g7:PAGE` that provide values of citation elements for the source details as specified by the source template, if any.
+- A `SOUR` substructure of a `_TPLT` that provides a cross-reference to a collection that the source is contained in.
+
+### Citation Element Values
+
+Following GEDCOM conventions, citation element values are not empty unless explicitly stated otherwise in the source template.
+
+### Examples
+
+See [Examples of Source Templates](#examples-of-source-templates).
+
+## Source Templates
+
+### Defining Source Templates
+
+A source template is a YAML file identified by its URI, which is preferably a URL that will resolve
+to the YAML file.
+
+Source templates associate citation elements with GEDCOM tags and contain Liquid template patterns that
+say how citation elements should be formatted when generating a citation.
+
+### Template Patterns
+
+See [Appendix: Template Patterns](#appendix-template-patterns).
 
 ### Source Template Schema
 
@@ -434,7 +492,7 @@ The following [JSON schema](https://datatracker.ietf.org/doc/html/draft-bhutton-
     },
     "formats": {
       "type": "array",
-      "description": "Array of one or more formats of citations",
+      "description": "Array of style guides for formatting citations.",
       "items": {
         "type": "object",
         "properties": {
@@ -499,73 +557,58 @@ The following [JSON schema](https://datatracker.ietf.org/doc/html/draft-bhutton-
         "required": ["name", "titl", "scite"],
         "additionalProperties": false
       }
+    },
+    "repository": {
+      "type": "boolean",
+      "description": "Whether the master source is expected to be in a repository."
+    },
+    "quality": {
+      "type": "integer",
+      "description": "Quality (roughly 0=unreliable, 1=questionable, 2=secondary, 3=primary, 4=original)."
     }
   },
-  "required": ["lang", "uri", "name", "description", "sfields", "formats"],
+  "required": ["lang", "uri", "name"],
   "additionalProperties": false
 }
 ```
 
-### GEDCOM Schema
+To dereference a URI specifying a source template:
 
-`CITATION_ELEMENT` :=
-```gedstruct
-   n _FIEL <Text>     {1:1}  ext:_FIEL
-     +1 TEXT <Text>   {1:1}  ext:_FIEL-TEXT
-```
+1. Look for a locally-installed file with a matching `uri` property.
+2. Attempt to retrieve the file from the URI directly via HTTPS.
 
-Indicates that a specific citation element has a given text value.
+## Using Source Templates
 
-**`_FIEL` (Field Name)**  `<ext:_FIEL>`
+An application can use a source template as follows.
 
-The property name of a citation element.
+Creating a source from a template:
 
-**`TEXT` (Field Value)**  `<ext:_FIEL-TEXT>`
+1. The application lets the user pick or search for a source template.
+2. The application prompts the user to enter values for citation elements as specified by the `sfields` array in the source template.
+3. The application creates a master source with `TITL`, `AUTH`, and `PUBL` whose values are generated using the corresponding template patterns in the source template.  If a template pattern is not specified in the source template, the GEDCOM tag is omitted.
+4. The application creates a `_TPLT` substructure with the URI of the source template.
+5. The application creates `_FIEL` substructures of the `_TPLT` with variables and values of any citation elements that (a) are in the source template, and (b) have non-empty values.
 
-The property value of a citation element.
+Creating a first reference note for a citation to a source with a template:
 
-`SOURCE_MODEL_REFERENCE` :=
-```gedstruct
-   n _TPLT <ShortURI>        {1:1}  ext:_TPLT
-     +1 <<CITATION_ELEMENT>> {0:M}
-     +1 SOUR @<XREF:SOUR>@   {0:1}  ext:_TPLT-SOUR
-```
+1. The application identifies the source template (if any) from the `_TPLT` of the master source.
+2. The application prompts the user to enter values for citation elements as specified by the `dfields` array in the source template.
+3. The application generates the `PAGE` value using the `page` template pattern in the source template.  If a template pattern is not specified in the source template, the GEDCOM tag is omitted.
+4. The application generates text for the citation using the `first` template pattern.  If such a pattern is not present, the following template pattern is used instead: `{% if scite %}{{ scite }}{% else %}{{ TITL }}{% if AUTH %}, by {{ AUTH }}{% endif %}{% if PUBL %} ({{ PUBL }}){% endif %}{% endif %}{% if PAGE %}, {{ PAGE }}{% endif %}{% if URL %}; {{ URL }}{% endif %}{% if NOTE %}. {{ NOTE }}{% endif %}.`  When evaluating this template pattern, the application substitutes values as follows:
+   - Any field appearing in the source template (whether in the `sfields` or `dfields` arrays) uses the value entered by the user.
+   - If the pattern `scite` appears in the source template, it is expanded using the template pattern there.
+   - Otherwise variables are expanded using the value of the corresponding GEDCOM tag.
+5. The application creates `_FIEL` substructures of the `PAGE` with variables and values of any citation elements that (a) are in the `dfields` of the source template, and (b) have non-empty values.
 
-Indicates a reference to a specific source template.  Any citation element substructures contain fields specified by that source template.  A `SOUR` substructure must be present if and only if the source template indicates a collection source template.  If a `SOUR` substructure is present, it indicates the source record is the containing connection.
+## Examples of Source Templates
 
-**`_TPLT` (Template Name)**  `<ext:_TPLT>`
+The following examples show the YAML text, which can be placed into `.yaml` files.
 
-The ShortURI of a source template.  It is recommended that the URI be resolvable to a YAML file containing the source template.
-
-**`SOUR` (Collection)**  `<ext:_TPLT-SOUR>`
-
-A source record for the collection in which the containing record is present.
-
-And the following additions to the existing `SOURCE_RECORD` and `SOURCE_CITATION` definitions:
-
-`SOURCE_RECORD` :=
-```gedstruct
-n @XREF:SOUR@ SOUR                      {1:1}  g7:record-SOUR
-  ...
-  +1 <<SOURCE_MODEL_REFERENCE>>         {0:1}
-```
-
-`SOURCE_CITATION` :=
-```
-n SOUR @<XREF:SOUR>@                    {1:1}  g7:SOUR
-   ...
-  +1 PAGE <Text>                        {0:1}  g7:PAGE
-      ...
-     +2 <<CITATION_ELEMENT>>            {0:M}
-```
-
-### Examples
-
-#### Grave Marker Template
+### Grave Marker Template
 
 The Grave Marker example is taken from the example at *Evidence Explained*, pages 213-214.
 
-##### YAML
+#### Grave Marker YAML
 
 ```yaml
 %YAML 1.2
@@ -591,13 +634,13 @@ dfields:
     label: Section, Lot, or Row
 formats:
   - name: Evidence Explained
-    titl: ${Cemetery}
-    publ: ${Location}
-    scite: ${Cemetery}${Location:+ (${Location})}
-    page: ${Section}
+    titl: "{{ Cemetery }}"
+    publ: "{{ Location }}"
+    scite: "{{ Cemetery }}{% if Location %} ({{ Location }}){% endif %}"
+    page: "{{ Section }}"
 ```
 
-##### Example GEDCOM
+#### Example GEDCOM
 
 ```gedcom
 0 @I1@ INDI
@@ -615,7 +658,7 @@ formats:
 1 PUBL Lawrence County, Illinois
 ```
 
-##### Example Formatted Citations
+#### Example Formatted Citations
 
 **Source List Entry**
 
@@ -625,11 +668,11 @@ Brian Cemetery (Lawrence County, Illinois).
 
 Brian Cemetery (Lawrence County, Illinois), Samuel Witter marker.
 
-#### Tax Record Templates
+### Tax Record Templates
 
 The Tax Roll and Tax Volume examples are taken from the microfilm examples at *Evidence Explained*, page 531.
 
-##### Tax Roll YAML
+#### Tax Roll YAML
 
 ```yaml
 %YAML 1.2
@@ -652,15 +695,13 @@ sfields:
     required: true
 formats:
   - name: Evidence Explained
-    titl: ${Jurisdiction}, ${Series}
-    publ: ${Location}
-    scite: ${Jurisdiction}, ${Series}
-    page: ${Section}
+    titl: "{{ Jurisdiction }}, {{ Series }}"
+    scite: "{{ Jurisdiction }}, {{ Series }}"
 repository: true
 quality: 3
 ```
 
-##### Tax Volume YAML
+#### Tax Volume YAML
 
 ```yaml
 %YAML 1.2
@@ -688,17 +729,19 @@ dfields:
     label: Item of Interest
 formats:
   - name: Evidence Explained
-    titl: ${Jurisdiction}, ${Volume}
-    scite: ${Jurisdiction}, ${Volume}
+    titl: "{{ Jurisdiction }}, {{ Volume }}"
+    scite: "{{ Jurisdiction }}, {{ Volume }}"
     page: |
-      ${Section:+${Section}${Page:+, }}${Page:+p. ${Page}}${Item:+${Page:+, }${Item}}
+      "{% if Section %}{{ Section }}{% if Page %}, {% endif %}{% endif %}"
+      "{%- if Page %}p. {{ Page }}{% endif %}"
+      "{%- if Item %}{% if Page %}, {% endif %}{{ Item }}{% endif %}"
 altpage:
-  - p. ${Page}
+  - "p. {{ Page }}"
 repository: true
 quality: 3
 ```
 
-##### Example GEDCOM
+#### Example GEDCOM
 
 ```gedcom
 0 @I1@ INDI
@@ -728,7 +771,7 @@ quality: 3
 1 NAME Family History Library
 ```
 
-##### Example Formatted Citations
+#### Example Formatted Citations
 
 **Source List Entries**
 
@@ -739,21 +782,21 @@ quality: 3
 
 - Christian County, Kentucky, 1799 Tax Book; FHL microfilm 7,926.
 
-### Input Matching
+## Input Matching
 
 For applications that support the `alt*` fields, such fields can be used to assist in converting a non-templated source to a templated source by providing an appropriate default for a user to confirm.
-Let’s look at an example using the Web Database model from *Evidence Explained*, pages 254 and 438.
+Let's look at an example using the Web Database model from *Evidence Explained*, pages 254 and 438.
 
 We will use the following YAML snippet as an example:
 
 ```
-    altpubl: ${Type}, ${Creator}, ${Website} (${Url} : accessed {Date})
-    altpubl: ${Type}, ${Creator}, ${Website} (${Url})
-    altpubl: ${Type}, ${Website} (${Url})
-    altpubl: ${Website} (${Url})
-    altpubl: ${Website}
-    publ: ${Type:+${Type}, }${Creator:+${Creator}, }${Website} (${Url}${Date:+ : accessed ${Date}})
-```
+    altpubl:
+      - "{{ Type }}, {{ Creator }}, {{ Website }} ({{ Url }} : accessed {{ Date }})"
+      - "{{ Type }}, {{ Creator }}, {{ Website }} ({{ Url }})"
+      - "{{ Type }}, {{ Website }} ({{ Url }})"
+      - "{{ Website }} ({{ Url }})"
+      - "{{ Website }}"
+    publ: "{% if Type %}{{ Type }}, {% endif %}{% if Creator %}{{ Creator }}, {% endif %}{{ Website }} ({{ Url }}{% if Date %} : accessed {{ Date }}{% endif %})"
 
 Above gives a number of patterns that can be recognized.  In this case, the `publ` pattern
 used for output is not particularly usable for input due to the use of conditionals, and the
@@ -782,3 +825,115 @@ Consider a GEDCOM containing:
 - `1 PUBL Canadian Genealogy Centre`
 
 	The payload above matches the fifth pattern.
+
+## Appendix: Template Patterns
+
+For programmatically generating GEDCOM structures from a given source template, this document
+recommends template patterns using [Liquid template syntax](https://shopify.github.io/liquid/).
+
+### Why Liquid?
+
+Liquid was created by Shopify specifically for safe template evaluation with untrusted input. It's battle-tested at scale:
+- Used by GitHub Pages (millions of templates daily)
+- Used by Jekyll static site generator
+- Used by Shopify (billions of template renders)
+
+### Safety Guarantees
+
+Liquid is designed to be safe by default:
+- **No infinite loops**: Iteration is limited (default 100, configurable)
+- **No arbitrary code execution**: Only pre-registered filters and tags
+- **No file system access**: Cannot read/write files
+- **No network access**: Cannot make HTTP requests
+- **Resource limits**: Memory and CPU limits in implementations
+
+### Parser Availability
+
+Mature, well-maintained parsers exist for all major languages:
+
+| Language | Library | GitHub Stars | URL |
+|----------|---------|--------------|-----|
+| Ruby | liquid | 10.8k | <https://github.com/Shopify/liquid> |
+| Python | python-liquid | 300+ | <https://github.com/jg-rp/liquid> |
+| JavaScript | liquidjs | 1.5k | <https://github.com/harttle/liquidjs> |
+| Java | Liqp | 240+ | <https://github.com/bkiers/Liqp> |
+| Go | liquid | 270+ | <https://github.com/osteele/liquid> |
+| PHP | liquid-php | 40+ | <https://github.com/kalimah-apps/liquid-php> |
+| C# | DotLiquid | 1k | <https://github.com/dotliquid/dotliquid> |
+| Rust | liquid-rust | 430+ | <https://github.com/cobalt-org/liquid-rust> |
+
+### Liquid Patterns
+
+`{{ variable }}`
+: Replace with the value of the specified variable.
+
+`{{ variable | default: "text" }}`
+: If variable is non-empty, replace with its value. Otherwise replace with the specified text.
+
+`{% if variable %}text{% endif %}`
+: If variable is empty, do nothing. Otherwise replace with the specified text.
+
+`{{ variable | escape }}`
+: Replace with HTML-escaped value of the variable.
+
+### Common Filters
+
+Liquid provides filters for common text transformations:
+
+```liquid
+{{ Author | split: ", " | reverse | join: " " }}  # "Smith, John" → "John Smith"
+{{ Date | date: "%Y" }}                           # Extract year from date
+{{ Title | capitalize }}                          # Proper case
+{{ Name | upcase }}                               # Convert to uppercase
+```
+
+### Lists
+
+For multiple authors or other repeated elements:
+
+```liquid
+{% for author in Authors limit:10 -%}
+  {{ author }}{% unless forloop.last %}, {% endunless %}
+{%- endfor %}
+```
+
+### Complex Conditionals
+
+More readable than nested patterns:
+
+```liquid
+{% if Type == "database" %}
+  database
+{% elsif Type == "digital" %}
+  digital image
+{% else %}
+  {{ Type }}
+{% endif %}
+```
+
+### Common Template Patterns
+
+Here are common Liquid patterns used in source templates:
+
+| Pattern | Description |
+|---------|-------------|
+| `{{ variable }}` | Replace with the value of the specified variable |
+| `{{ variable \| default: "default" }}` | Use default value if variable is empty |
+| `{% if variable %}text{% endif %}` | Conditional text inclusion |
+| `{{ variable \| escape }}` | HTML-escape the variable value |
+
+Note: Liquid rarely needs escaping. When needed, use `{{ "{{" }}` to produce `{{`.
+
+### Example Template Pattern
+
+```liquid
+{{ Cemetery }}{% if Location %} ({{ Location }}){% endif %}
+```
+
+This pattern outputs the cemetery name, and if a location is provided, adds it in parentheses.
+
+```liquid
+{% if Type %}{{ Type }}, {% endif %}{% if Creator %}{{ Creator }}, {% endif %}{{ Website }} ({{ Url }}{% if Date %} : accessed {{ Date }}{% endif %})
+```
+
+This pattern conditionally includes type and creator if provided, always includes the website and URL, and optionally adds an access date.
