@@ -637,10 +637,10 @@ dfields:
     label: Section, Lot, or Row
 formats:
   - name: Evidence Explained
-    titl: {{ Cemetery }}
-    publ: {{ Location }}
-    scite: {{ Cemetery }}{% if Location %} ({{ Location }}){% endif %}
-    page: {{ Section }}
+    titl: "{{ Cemetery }}"
+    publ: "{{ Location }}"
+    scite: "{{ Cemetery }}{% if Location %} ({{ Location }}){% endif %}"
+    page: "{{ Section }}"
 ```
 
 #### Example GEDCOM
@@ -698,8 +698,8 @@ sfields:
     required: true
 formats:
   - name: Evidence Explained
-    titl: {{ Jurisdiction }}, {{ Series }}
-    scite: {{ Jurisdiction }}, {{ Series }}
+    titl: "{{ Jurisdiction }}, {{ Series }}"
+    scite: "{{ Jurisdiction }}, {{ Series }}"
 repository: true
 quality: 3
 ```
@@ -732,14 +732,14 @@ dfields:
     label: Item of Interest
 formats:
   - name: Evidence Explained
-    titl: {{ Jurisdiction }}, {{ Volume }}
-    scite: {{ Jurisdiction }}, {{ Volume }}
+    titl: "{{ Jurisdiction }}, {{ Volume }}"
+    scite: "{{ Jurisdiction }}, {{ Volume }}"
     page: |
-      {% if Section %}{{ Section }}{% if Page %}, {% endif %}{% endif %}
-      {%- if Page %}p. {{ Page }}{% endif %}
-      {%- if Item %}{% if Page %}, {% endif %}{{ Item }}{% endif %}
+      "{% if Section %}{{ Section }}{% if Page %}, {% endif %}{% endif %}"
+      "{%- if Page %}p. {{ Page }}{% endif %}"
+      "{%- if Item %}{% if Page %}, {% endif %}{{ Item }}{% endif %}"
 altpage:
-  - p. {{ Page }}
+  - "p. {{ Page }}"
 repository: true
 quality: 3
 ```
@@ -799,7 +799,7 @@ We will use the following YAML snippet as an example:
       - "{{ Type }}, {{ Website }} ({{ Url }})"
       - "{{ Website }} ({{ Url }})"
       - "{{ Website }}"
-    publ: {% if Type %}{{ Type }}, {% endif %}{% if Creator %}{{ Creator }}, {% endif %}{{ Website }} ({{ Url }}{% if Date %} : accessed {{ Date }}{% endif %})
+    publ: "{% if Type %}{{ Type }}, {% endif %}{% if Creator %}{{ Creator }}, {% endif %}{{ Website }} ({{ Url }}{% if Date %} : accessed {{ Date }}{% endif %})"
 
 Above gives a number of patterns that can be recognized.  In this case, the `publ` pattern
 used for output is not particularly usable for input due to the use of conditionals, and the
