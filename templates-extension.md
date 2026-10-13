@@ -2,7 +2,7 @@
 
 ## Use of Property Sets and Templates
 
-[Citations: Goals and Considerations (fhiso.org)](https://fhiso.org/TR/citation-goals) says:
+[Citations: Goals and Considerations (fhiso.org)](https://web.archive.org/web/20230626185821/https://fhiso.org/TR/citation-goals) says:
 
 > Property set design requires a trade-off between complexity and expressiveness. Academic
 > property set citation standards typically have between 25 and 100 defined property names,
@@ -22,7 +22,7 @@ template.  There is not necessarily any expectation that two templates use the s
 name to refer to a common data element, nor that the same property name doesn't have different
 meanings in different templates.
 
-[Citations: Goals and Considerations (fhiso.org)](https://fhiso.org/TR/citation-goals) also says
+[Citations: Goals and Considerations (fhiso.org)](https://web.archive.org/web/20230626185821/https://fhiso.org/TR/citation-goals) also says
 that the "Property Sets and Templates" category of solutions does not support the Provenance or
 the Customise requirements.  However, the present proposal does support the Customise requirement.
 And the Provenance requirement is not precluded but will be covered in a separate extension
@@ -40,7 +40,7 @@ A few examples include:
 - EndNote (<https://clarivate.com/webofsciencegroup/support/endnote/>) manages source and can generate citations in a variety of formats (see for example position 6:00 in the Windows video), including APA, Chicago, Turabian, etc.
 - The OCLC Citations API (<https://developer.api.oclc.org/citations-api>) can access the WorldCat database and generate citations in a variety of formats (see CitationStyle), including APA, Chicago, MLA, Turabian, etc.
 
-[Citations: Goals and Considerations (fhiso.org)](https://fhiso.org/TR/citation-goals) also explains:
+[Citations: Goals and Considerations (fhiso.org)](https://web.archive.org/web/20230626185821/https://fhiso.org/TR/citation-goals) also explains:
 
 > *Property sets* and *templates* are used by BibTeX, CiteProc, CSL, EndNote, Zotero, and other
 > academic document preparation toolchains. *Citation data* is provided in this format by most
@@ -452,7 +452,7 @@ The following [JSON schema](https://datatracker.ietf.org/doc/html/draft-bhutton-
           },
           "required": {
             "type": "boolean",
-            "description": "Whether the citation element is required to have a  non-empty value."
+            "description": "Whether the citation element is required to have a non-empty value."
           }
         },
         "required": ["variable", "label"],
@@ -475,12 +475,20 @@ The following [JSON schema](https://datatracker.ietf.org/doc/html/draft-bhutton-
           },
           "required": {
             "type": "boolean",
-            "description": "Whether the citation element is required to have a  non-empty value."
+            "description": "Whether the citation element is required to have a non-empty value."
           }
         },
         "required": ["variable", "label"],
         "additionalProperties": false
       }
+    },
+    "repository": {
+      "type": "boolean",
+      "description": "Whether this type of source would normally require listing whose possession the source is in (i.e., the repository). This should be true for unique items such as a family bible, diary, or letter. Defaults to false if not present."
+    },
+    "quality": {
+      "type": "number",
+      "description": "An enumerated value from set g7:enumset-QUAY indicating the credibility of the type of source as a whole. For example, a birth certificate might be Primary, whereas a family bible might be Secondary (since the information may have been recorded at a later time). If this structure is not present, it is the same as if Questionable (1) had been specified. Note: The structures for representing the strength of and confidence in various claims are known to be inadequate and are likely to change in a future version of this specification."
     },
     "formats": {
       "type": "array",
@@ -490,75 +498,64 @@ The following [JSON schema](https://datatracker.ietf.org/doc/html/draft-bhutton-
         "properties": {
           "name": {
             "type": "string",
-            "description": "The name of the style guide for formatting citations, such as 'Evidence Explained'."
+            "description": "The name of the citation format."
           },
           "abbr": {
             "type": "string",
-            "description": "Template pattern that specifies how to construct an abbreviated title for the master source. The abbreviated title constructed can be displayed in a source list when the source record does not have an ABBR structure. (An implementation might store the abbreviated title constructed in an ABBR structure, but this is not required.) The payload must not contain variables defined in the dfields array, but may contain variables defined in the sfields array, and if a collection is specified then it may also use the variable \"CollectionAbbr\" which will expand to the collection's abbreviated title."
+            "description": "Pattern that specifies how to construct an abbreviated title for the master source. The abbreviated title constructed can be displayed in a source list when the source record does not have an ABBR structure. (An implementation might store the abbreviated title constructed in an ABBR structure, but this is not required.) The payload must not contain variables defined in the dfields array, but may contain variables defined in the sfields array, and if a collection is specified then it may also use the variable \"CollectionAbbr\" which will expand to the collection's abbreviated title."
           },
           "titl": {
             "type": "string",
-            "description": "Template pattern that specifies how to construct a TITL payload. The payload must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
+            "description": "Pattern that specifies how to construct an AUTH payload for the master source. The payload must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
           "auth": {
             "type": "string",
-            "description": "Template pattern for formatting an AUTH using the given style guide."
+            "description": "Pattern that specifies how to construct a TITL payload. The payload must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
           "publ": {
             "type": "string",
-            "description": "Template pattern for formatting a PUBL using the given style guide."
+            "description": "Pattern that specifies how to construct a PUBL payload for the master source. The string must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
           "scite": {
             "type": "string",
-            "description": "Template pattern for formatting the master source portion of a first reference note."
+            "description": "Pattern that specifies how to construct a PAGE payload. The payload may contain variables defined in the dfields array or the sfields array."
           },
           "page": {
             "type": "string",
-            "description": "Template pattern for formatting a PAGE using the given style guide."
+            "description": "Pattern that specifies how to construct a CALN payload. The string must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
           "slist": {
             "type": "string",
-            "description": "Template pattern for formatting a source list entry using the given style guide."
+            "description": "Pattern that specifies how to construct an (HTML-format) citation string (known in EE as the \"First (Full) Reference Note\" in a QuickCheck Model), using only master source citation elements. That is, it must not contain any citation elements that would not appear in the master source (shown in EE's QuickCheck Models as the \"Source List Entry\"). The pattern must not contain variables defined in the dfields array but may contain variables defined in the sfields array."
           },
           "first": {
             "type": "string",
-            "description": "Template pattern for formatting a first reference note using the given style guide."
+            "description": "A pattern that specifies how to construct the rest of the (HTML-format) citation string (known in EE as the \"First (Full) Reference Note\" in a QuickCheck Model), and is appended to the string constructed with the scite pattern. If no dcite string is specified, it defaults to \", \" followed by the PAGE payload."
           },
-          "short": {
-            "type": "string",
-            "description": "Template pattern for formatting a short subsequent note using the given style guide."
+          "alttitl": {
+            "type": "array",
+            "description": "Patterns that specify an alternate way to construct a TITL payload for the master source, used only for parsing purposes when converting a FamilySearch GEDCOM 7.0 source to one using a source template. The pattern must not contain conditions or functions, and must not contain variables defined in the dfields array, but may contain variables defined in the sfields array. Any alttitl patterns are tried in order before trying the titl pattern.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "altpubl": {
+            "type": "array",
+            "description": "Patterns that specify an alternate way to construct a PUBL payload for the master source, used only for parsing purposes when converting a FamilySearch GEDCOM 7.0 source to one using a source template. The pattern must not contain conditions or functions, and must not contain variables defined in the dfields array, but may contain variables defined in the sfields array. Any altpubl patterns are tried in order before trying the publ pattern.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "altpage": {
+            "type": "array",
+            "description": "Patterns that specify an alternate way to construct a PAGE payload for the master source, used only for parsing purposes when converting a FamilySearch GEDCOM 7.0 source to one using a source template. The pattern must not contain conditions or functions, but may contain variables defined in the dfields array or the sfields array.  Any altpage patterns are tried in order before trying the page pattern.",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": ["name", "titl", "scite"],
         "additionalProperties": false
-      }
-    },
-    "alttitl": {
-      "type": "array",
-      "description": "Array of patterns that can be matched for an existing TITL.",
-      "items": {
-        "type": "string"
-      }
-    },
-    "altauth": {
-      "type": "array",
-      "description": "Array of patterns that can be matched for an existing AUTH.",
-      "items": {
-        "type": "string"
-      }
-    },
-    "altpubl": {
-      "type": "array",
-      "description": "Array of patterns that can be matched for an existing PUBL.",
-      "items": {
-        "type": "string"
-      }
-    },
-    "altpage": {
-      "type": "array",
-      "description": "Array of patterns that can be matched for an existing PAGE.",
-      "items": {
-        "type": "string"
       }
     },
     "repository": {

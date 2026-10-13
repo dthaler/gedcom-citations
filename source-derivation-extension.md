@@ -1,6 +1,6 @@
 # Source Derivation GEDCOM Extension (Proposed)
 
-FHISO's [Citations: Goals and Considerations](https://fhiso.org/TR/citation-goals) lists some things
+FHISO's [Citations: Goals and Considerations](https://web.archive.org/web/20230626185821/https://fhiso.org/TR/citation-goals) lists some things
 that a data model should support, including provenance.  It notes:
 
 > One kind of layering is derivation: a source can be a copy, translation, transcript,
