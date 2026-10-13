@@ -124,7 +124,7 @@ As discussed in Family Historian's [Sources and Source Templates](https://www.fa
 and [Source Template Formats](https://www.family-historian.co.uk/help/fh7/sourcetemplateformats.html) documents,
 Family Historian 7 supports creating sources from source templates, and appears to allow users to define their own
 as well.  Like RootsMagic, the syntax is proprietary, not based on any open standard or language
-or open source defacto standard.
+or open source de facto standard.
 
 As covered in the last document above, the syntax of patterns it uses to construct formatted citations uses
 `{}` around field names, such as:
@@ -281,7 +281,7 @@ functions, where the functions are well-known, not per template.  For example:
 ```
 
 Like RootsMagic and Family Historian, the syntax is proprietary, not based on any open standard or language
-or open source defacto standard, but it is very similar to standard programming languages.
+or open source de facto standard, but it is very similar to standard programming languages.
 On the other hand, it is much more verbose than RootsMagic's and Family Historian's template languages.
 
 ## Purpose
@@ -596,7 +596,7 @@ Creating a first reference note for a citation to a source with a template:
 
 1. The application identifies the source template (if any) from the `_TPLT` of the master source.
 2. The application prompts the user to enter values for citation elements as specified by the `dfields` array in the source template.
-3. The application sets the `PAGE` value by generated using the `page` template pattern in the source template.  If a template pattern is not specified in the source template, the GEDCOM tag is omitted.
+3. The application generates the `PAGE` value using the `page` template pattern in the source template.  If a template pattern is not specified in the source template, the GEDCOM tag is omitted.
 4. The application generates text for the citation using the `first` template pattern.  If such a pattern is not present, the following template pattern is used instead: `{% if scite %}{{ scite }}{% else %}{{ TITL }}{% if AUTH %}, by {{ AUTH }}{% endif %}{% if PUBL %} ({{ PUBL }}){% endif %}{% endif %}{% if PAGE %}, {{ PAGE }}{% endif %}{% if URL %}; {{ URL }}{% endif %}{% if NOTE %}. {{ NOTE }}{% endif %}.`  When evaluating this template pattern, the application substitutes values as follows:
    - Any field appearing in the source template (whether in the `sfields` or `dfields` arrays) uses the value entered by the user.
    - If the pattern `scite` appears in the source template, it is expanded using the template pattern there.
