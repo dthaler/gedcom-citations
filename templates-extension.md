@@ -619,8 +619,9 @@ The Grave Marker example is taken from the monument example at *Evidence Explain
 lang: en-US
 uri: https://gedcom.io/templates/GraveMarker
 name: Grave Marker
-description: The Grave Marker model is used for grave markers, cemetery monuments,
-  and other forms of cemetery art (see "Evidence Explained", pages 246-247).
+description: The Grave Marker model is used for tombstones and other types of
+  grave markers (see "Evidence Explained", pages 213-214).  It is not used for
+  digital images found online; for those use the Website model instead.
 keywords:
   - monument
   - headstone
