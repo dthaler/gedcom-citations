@@ -54,6 +54,11 @@ discuss a number of popular genealogy applications that appear to use source tem
 Family Tree Maker, RootsMagic, and Legacy.  Source templates are also used by various other
 FamilySearch-certified applications, including Family Historian and MagiKey Family Tree.
 
+Albert Emmerich describes another implementation in a comment on
+[GEDCOM issue #694](https://github.com/FamilySearch/GEDCOM/issues/694#issuecomment-3223729052)
+(see also [GEDCOM issue #348](https://github.com/FamilySearch/GEDCOM/issues/348#issuecomment-5990573138)).
+It uses `PAGE_BD`, `PAGE_KP`, `PAGE_JG`, `PAGE_PG`, `PAGE_NR`, and `PAGE_WW`.
+
 #### RootsMagic 6
 
 As noted in [Citations and the GEDCOM (evidentiasoftware.com)](https://evidentiasoftware.com/citations-and-the-gedccom/) and
