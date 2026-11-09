@@ -1,6 +1,6 @@
 # Source Templates Extension Rationale
 
-This document contains the survey and requirements motivating the [Source Templates Extension](templates-extension.md).
+This document contains the survey and requirements motivating the [Source Templates Extension](templates-extension.md), and uses the [common terminology](background.md#terminology) defined in this repository.
 
 ## Use of Property Sets and Templates
 
