@@ -395,23 +395,6 @@ n SOUR @XREF:SOUR@                          {1:1}  g7:record-SOUR
 
 The `SOUR` substructure is used to identify a collection that the `SOUR` is contained in, such as when using a source template that is for a source within a collection.
 
-## Definitions
-
-Master Source
-: A `g7:record-SOUR`.
-
-Source Detail
-: A `g7:SOUR` substructure of an `INDI` or `FAM` record.
-
-Citation
-: Data that would be output when displaying the associated source in a source list entry, first reference note, or short subsequent note.
-
-Citation Element
-: A piece of information about a source, such as its author, title, publication date, repository, URL, etc.
-
-Source Template
-: A set of information about a class of sources, with a common set of citation elements and rules for formatting citations of sources of that class.
-
 ## Extensions to the `SOUR` structure
 
 ### Overview
