@@ -2,17 +2,27 @@
 
 ## Terminology
 
-This document uses the following terminology:
+This repository uses the following terminology:
 
-**Source Template:** A schematized template for how to compose a bibliography entry, footnote, or other type of citation.  This corresponds to what Evidence Explained calls a “QuickCheck Model”.
+**Master Source:** A reusable description of a source that captures information common to multiple citations of the same source. A master source typically identifies the source itself (such as a book, database, collection, or record set) but does not include details specific to a particular item, page, image, or entry. In GEDCOM, this is represented by a `SOURCE_RECORD`.
 
-**Master Source:** An entire source.  In GEDCOM this is a `SOURCE_RECORD`.
+**Source Details:** Information that identifies the specific portion of a master source relevant to a particular assertion or fact, such as a page number, certificate number, database entry, image, household, or record.  In GEDCOM, this information is typically stored within a `SOURCE_CITATION`.
 
-**Source Details:** The part of a source relevant to a specific fact, such as a specific page or entry.  In GEDCOM this is a `SOURCE_CITATION` that points to the source record.
+**Citation**: The combination of a master source and any associated source details, used to identify, describe, or reference source material. A citation may be rendered in different forms depending on context.  In GEDCOM, this is represented by a `SOURCE_CITATION` that references a `SOURCE_RECORD` and includes source details.
 
 **Citation Element:** As defined in [Citation Elements: Concepts (fhiso.org)](https://web.archive.org/web/20231003225651/https://fhiso.org/TR/cev-concepts), a logically self-contained piece of information in a citation layer that might reasonably be included in a formatted citation.  RootsMagic calls this a `FIELD` structure in GEDCOM.
 
-**Formatted Citation:** As defined in [Citation Elements: Concepts (fhiso.org)](https://web.archive.org/web/20231003225651/https://fhiso.org/TR/cev-concepts), a citation that has been rendered into human-readable form, typically as a sentence or short paragraph that might be used as a footnote, endnote, tablenote or bibliography entry. There is no single standard on the correct form of formatted citations; many different style guides exist, each giving their own rules on how to construct a formatted citation.
+**Formatted Citation:** A human-readable rendering of citation information, typically as a sentence or short paragraph suitable for use in a source list, bibliography, footnote, endnote, or similar reference. As defined in [Citation Elements: Concepts (fhiso.org)](https://web.archive.org/web/20231003225651/https://fhiso.org/TR/cev-concepts), a formatted citation is intended for human consumption. Different citation styles may render the same citation information differently.
+
+**First Reference Note**: A formatted citation used when a source is cited for the first time within a particular work or publication context. A first reference note is typically presented in a complete form sufficient to identify the source without requiring the reader to consult earlier citations.
+
+**Subsequent Note**: A formatted citation used when a previously cited source is cited again within the same work or publication context. It may use an abbreviated format.
+
+**Source List**: The collection of master sources used within a research project, database, or publication. A source list serves as the authoritative inventory of sources from which source details and formatted citations are derived.
+
+**Source List Entry**: A formatted citation intended for inclusion in a source list or bibliography.
+
+**Source Template:** A specification for a class of sources that defines the citation elements used to describe those sources and the rules for rendering those elements into formatted citations such as source list entries, footnotes, and endnotes. This corresponds to what Evidence Explained (1st ed.) calls a "QuickCheck Model."
 
 ## Requirements
 
