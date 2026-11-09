@@ -47,6 +47,11 @@ A few examples include:
 > academic-oriented online repositories and archives. *Templates* in this format are offered by
 > most academic publication venues.
 
+A [comparison of reference management software](https://en.wikipedia.org/wiki/Comparison_of_reference_management_software) 
+shows that many other widely-used software implementations support multiple citation styles
+(APA, Chicago, MLA, etc.) using templates such as BibTex style files or CSL, and the ability
+to import references from databases such as OCLC, Google Scholar, and ProQuest.
+
 ### GEDCOM Precedents ("Used")
 
 [Citations and the GEDCOM (evidentiasoftware.com)](https://evidentiasoftware.com/citations-and-the-gedccom/) and [Easier Source Citation With Your Genealogy Software (familytreemagazine.com)](https://www.geneamusings.com/2011/02/peeking-at-rootsmagic-4-source.html)
