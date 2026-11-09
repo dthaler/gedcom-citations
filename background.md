@@ -2,17 +2,23 @@
 
 ## Terminology
 
-This document uses the following terminology:
+This repository uses the following terminology:
 
-**Source Template:** A schematized template for how to compose a bibliography entry, footnote, or other type of citation.  This corresponds to what Evidence Explained calls a “QuickCheck Model”.
+**Source Template:** A schematized template for how to compose a bibliography entry, footnote, or other type of citation.  This corresponds to what _Evidence Explained_ (1st ed.) calls a "QuickCheck Model".
 
-**Master Source:** An entire source.  In GEDCOM this is a `SOURCE_RECORD`.
+**Master Source:** A reusable description of a source that captures information common to multiple citations of the same source. A master source typically identifies the source itself (such as a book, database, collection, or record set) but does not include details specific to a particular item, page, image, or entry. In GEDCOM, this is represented by a `SOURCE_RECORD`.
 
-**Source Details:** The part of a source relevant to a specific fact, such as a specific page or entry.  In GEDCOM this is a `SOURCE_CITATION` that points to the source record.
+**Source Details:** Information that identifies the specific portion of a master source relevant to a particular assertion or fact, such as a page number, certificate number, database entry, image, household, or record. In GEDCOM, this is represented by a `SOURCE_CITATION` that references a `SOURCE_RECORD`.
 
 **Citation Element:** As defined in [Citation Elements: Concepts (fhiso.org)](https://web.archive.org/web/20231003225651/https://fhiso.org/TR/cev-concepts), a logically self-contained piece of information in a citation layer that might reasonably be included in a formatted citation.  RootsMagic calls this a `FIELD` structure in GEDCOM.
 
 **Formatted Citation:** As defined in [Citation Elements: Concepts (fhiso.org)](https://web.archive.org/web/20231003225651/https://fhiso.org/TR/cev-concepts), a citation that has been rendered into human-readable form, typically as a sentence or short paragraph that might be used as a footnote, endnote, tablenote or bibliography entry. There is no single standard on the correct form of formatted citations; many different style guides exist, each giving their own rules on how to construct a formatted citation.
+
+**Source List**: The collection of master sources available within a research project, database, or publication. A source list serves as the authoritative inventory of sources from which source details and formatted citations are derived.
+
+**First Reference Note**: The first citation of a source within a work, database, report, or other publication context. A first reference note is typically presented in a complete form sufficient to identify the source without requiring the reader to consult earlier citations.
+
+**Subsequent Note**: A citation that refers to a source that has already been cited previously within the same work, database, report, or publication context. A subsequent note may be presented in an abbreviated form because the full identification of the source has already been provided by a first reference note.
 
 ## Requirements
 

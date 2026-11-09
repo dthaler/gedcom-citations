@@ -1,5 +1,7 @@
 # Source Templates Extension
 
+This document uses the [common terminology](background.md#terminology) defined in this repository.
+
 ## Use of Property Sets and Templates
 
 [Citations: Goals and Considerations (fhiso.org)](https://web.archive.org/web/20230626185821/https://fhiso.org/TR/citation-goals) says:
