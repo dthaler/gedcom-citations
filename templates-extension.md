@@ -287,8 +287,9 @@ On the other hand, it is much more verbose than RootsMagic's and Family Historia
 #### GEN_DO!
 
 According to a [post by Albert Emmerich](https://github.com/FamilySearch/GEDCOM/issues/348#issuecomment-5990573138),
-GEN_DO! splits the `PAGE` structure into more detailed structures in a custom `_CIT` record.
-The detailed structures are then used when displaying citations.  For example:
+[GEN_DO!](https://www.gen-do.de/) splits the `PAGE` structure into more detailed structures
+in a custom `_CIT` record.  The detailed structures are then used when displaying citations.
+For example:
 
 ```
 0 @C1@ _CIT
