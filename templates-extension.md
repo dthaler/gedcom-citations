@@ -319,7 +319,7 @@ where
 * `PAGE_NR`: number of entry
 * `PAGE_WW`: web link
 * `PAGE_ZZ`: other information for page
-* `CNOTE`: an inline `NOTE` attached to the ciattion.
+* `CNOTE`: an inline `NOTE` attached to the citation.
 
 ## Purpose
 
