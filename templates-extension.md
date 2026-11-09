@@ -284,6 +284,49 @@ Like RootsMagic and Family Historian, the syntax is proprietary, not based on an
 or open source de facto standard, but it is very similar to standard programming languages.
 On the other hand, it is much more verbose than RootsMagic's and Family Historian's template languages.
 
+#### GEN_DO!
+
+According to a [post by Albert Emmerich](https://github.com/FamilySearch/GEDCOM/issues/348#issuecomment-5990573138),
+[GEN_DO!](https://www.gen-do.de/) splits the `PAGE` structure into more detailed structures
+in a custom `_CIT` record.  The detailed structures are then used when displaying citations.
+For example:
+
+```
+0 @C1@ _CIT
+1 SOUR @S1@
+1 EVEN DEAT
+1 PAGE_BD TrB 1845-1852
+1 PAGE_KP Sterbefälle
+1 PAGE_JG 1852
+1 PAGE_PG 41
+1 PAGE_NR 35 w:18
+1 PAGE_WW https://www.archion.de/p/373e7ccbcf/
+1 DATA
+2 TEXT [1679] 15) Dienstgag p Dom Sept: Henrich Schomaker aus GE begrb 59 Jahr alt
+1 CNOTE Archion Bild Nr. 114
+1 CHAN
+2 DATE 27 JAN 2026
+3 TIME 00:08:50
+1 UID 0199a1ec-9e38-7000-885d-5f4d86f83d53
+```
+
+where
+
+* `PAGE_BD`: volume
+* `PAGE_KP`: chapter
+* `PAGE_JG`: year
+* `PAGE_PG`: page number
+* `PAGE_NR`: number of entry
+* `PAGE_WW`: web link
+* `PAGE_ZZ`: other information for page
+* `CNOTE`: an inline `NOTE` attached to the citation.
+
+(Note that the tags above are non-conformant in that they are non-standard and do not start
+with an underscore, but they are what is implemented.)
+
+Although GEN_DO! does export the citation elements in GEDCOM,
+it does not expose the patterns it uses in source templates.
+
 ## Purpose
 
 Many types of sources exist with a common set of elements that can be used to format a citation.
