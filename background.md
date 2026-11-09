@@ -18,7 +18,7 @@ This repository uses the following terminology:
 
 **Subsequent Note**: A formatted citation used when a previously cited source is cited again within the same work or publication context. It may use an abbreviated format.
 
-**Source List**: The collection of master sources available within a research project, database, or publication. A source list serves as the authoritative inventory of sources from which source details and formatted citations are derived.
+**Source List**: The collection of master sources used within a research project, database, or publication. A source list serves as the authoritative inventory of sources from which source details and formatted citations are derived.
 
 **Source List Entry**: A formatted citation intended for inclusion in a source list or bibliography.
 
