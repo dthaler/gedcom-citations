@@ -49,7 +49,7 @@ A few examples include:
 
 A [comparison of reference management software](https://en.wikipedia.org/wiki/Comparison_of_reference_management_software) 
 shows that many other widely-used software implementations support multiple citation styles
-(APA, Chicago, MLA, etc.) using templates such as BibTex style files or CSL, and the ability
+(APA, Chicago, MLA, etc.) using templates such as BibTex style files or CSL files, and the ability
 to import references from databases such as OCLC, Google Scholar, and ProQuest.
 
 ### GEDCOM Precedents ("Used")
