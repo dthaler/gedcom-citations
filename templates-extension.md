@@ -321,6 +321,12 @@ where
 * `PAGE_ZZ`: other information for page
 * `CNOTE`: an inline `NOTE` attached to the ciattion.
 
+(Note that the tags above are non-conformant in that they are non-standard and do not start
+with an underscore, but they are what is implemented.)
+
+Although GEN_DO! does export the citation elements in GEDCOM,
+it does not expose the patterns it uses in source templates.
+
 ## Purpose
 
 Many types of sources exist with a common set of elements that can be used to format a citation.
